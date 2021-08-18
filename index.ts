@@ -70,3 +70,21 @@ let dropDownColumns: DropDownList = new DropDownList({
 dropDownColumns.appendTo('#editmodes');
 
 
+function rowDataBound(args: RowDataBoundEventArgs) {
+  if (!(args.data as ITreeData).hasChildRecords) {
+    //responsible for the rows attributes
+    (args.row as HTMLElement).style.backgroundColor = '#008cff';
+    (args.row as HTMLElement).style.fontFamily = 'serif';
+  }
+}
+function queryCellInfo(args: QueryCellInfoEventArgs) {
+  if (!(args.data as ITreeData).hasChildRecords) {
+    if ((args.cell as HTMLElement).classList.contains('e-unboundcell')) {
+      ((args.cell as HTMLElement).querySelector(
+        '.e-unboundcelldiv'
+      ) as HTMLElement).style.display = 'none';
+    }
+  }
+}
+
+
