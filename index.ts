@@ -1,35 +1,39 @@
-import { TreeGrid, Filter, Page, Resize, Toolbar, Edit, CommandColumn, Selection, ContextMenu, Sort, Reorder, QueryCellInfoEventArgs, RowDD } from '@syncfusion/ej2-treegrid';
+import { TreeGrid, Toolbar, Edit, Sort, Filter, Selection, Page, Resize, Reorder, RowDD, CommandColumn, ContextMenu, ITreeData } from '@syncfusion/ej2-treegrid';
 import { QueryCellInfoEventArgs, RowDataBoundEventArgs } from '@syncfusion/ej2-grids';
-import { sampleData } from './datasource.ts';
 import { DropDownList, ChangeEventArgs } from '@syncfusion/ej2-dropdowns';
+import { Data } from './datasource.ts';
 
-TreeGrid.Inject( Page, Filter, Toolbar, Edit, Resize, CommandColumn, Selection, ContextMenu, Sort, Reorder, RowDD );
+
+TreeGrid.Inject( Toolbar, Edit, Sort, Filter, Selection, Page, Resize, Reorder, RowDD, CommandColumn, ContextMenu );
 
 let treeGridObj: TreeGrid = new TreeGrid({
-  dataSource: sampleData,
+
+  dataSource: Data,
+
   childMapping: 'subtasks',
-  selectionSettings: { type: 'Multiple', cellSelectionMode: 'Both' },
-  allowSorting: true,
-  treeColumnIndex: 1,
-  allowReordering: true,
-  allowResizing: true,
-  allowRowDragAndDrop: true,
-  allowPaging: true,
-  allowFiltering: true,
-  filterSettings: {
-    type: 'FilterBar',
-    hierarchyMode: 'Parent',
-    mode: 'Immediate'
-  },
-
-  pageSettings: { pageSize: 15 },
-
-  editSettings: { allowAdding: true, allowEditing: true, allowDeleting: true, mode: 'Row', showDeleteConfirmDialog: 'true', newRowPosition: 'Above' },
-
-  contextMenuItems: [ 'SortAscending', 'SortDescending', 'Edit', 'Delete', 'Save', 'Cancel', 'FirstPage', 'PrevPage', 'LastPage', 'NextPage' ],
 
   toolbar: ['Add', 'Delete', 'Update', 'Cancel'],
 
+  editSettings: { allowAdding: true, allowEditing: true, allowDeleting: true, mode: 'Row', showDeleteConfirmDialog: 'true', newRowPosition: 'Above' },
+
+  allowSorting: true,
+
+  allowFiltering: true, filterSettings: { type: 'FilterBar', hierarchyMode: 'Parent', mode: 'Immediate' },
+
+  selectionSettings: { type: 'Multiple', cellSelectionMode: 'Both' },
+
+  allowPaging: true, pageSettings: { pageSize: 15 },
+
+  allowResizing: true,
+
+  allowReordering: true,
+
+  allowRowDragAndDrop: true,
+
+  contextMenuItems: [ 'SortAscending', 'SortDescending', 'Edit', 'Delete', 'Save', 'Cancel', 'FirstPage', 'PrevPage', 'LastPage', 'NextPage' ],
+
+  treeColumnIndex: 1,
+  
   columns: [
     {
       field: 'taskID', headerText: 'Task ID', isPrimaryKey: true, textAlign: 'Right', validationRules: { required: true, number: true }, width: 90

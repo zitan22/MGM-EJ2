@@ -2,7 +2,7 @@
  * TreeGrid DataSource
  */
 
-export let sampleData: Object[] = [
+export let Data: Object[] = [
   {
     taskID: 1,
     taskName: 'task1',
