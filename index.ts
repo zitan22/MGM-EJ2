@@ -30,7 +30,7 @@ let treeGridObj: TreeGrid = new TreeGrid({
 
   allowRowDragAndDrop: true,
 
-  contextMenuItems: [ 'SortAscending', 'SortDescending', 'Edit', 'Delete', 'Save', 'Cancel', 'FirstPage', 'PrevPage', 'LastPage', 'NextPage' ],
+  contextMenuItems: [ 'AddRow', 'Edit', 'Delete', 'Copy', { text: 'Cut' } ],
 
   treeColumnIndex: 1,
   
