@@ -15,11 +15,17 @@ import {
 } from '@syncfusion/ej2-treegrid';
 import { 
   QueryCellInfoEventArgs, 
-  RowDataBoundEventArgs 
+  RowDataBoundEventArgs, 
+  RowSelectEventArgs,
+  Action
 } from '@syncfusion/ej2-grids';
 import { DropDownList, ChangeEventArgs } from '@syncfusion/ej2-dropdowns';
+import { remove } from '@syncfusion/ej2-base';
 import { Data } from './datasource.ts';
 
+
+let copiedRecord: any;
+let cutedRecord: any;
 
 TreeGrid.Inject( 
   Toolbar, 
@@ -34,9 +40,34 @@ TreeGrid.Inject(
   CommandColumn, 
   ContextMenu 
 );
+let menuItems: Object[] = [
+  'AddRow',
+  'Edit',
+  'Delete',
+  'Copy',
+  {
+    separator: true
+  },
+  {
+    text: 'Cut', id: 'cut'
+  },
 
+  {
+    text: 'Paste',
+    items: [
+      {
+        text: 'Above', id: 'above'
+      },
+      {
+        text: 'Below', id: 'below'
+      },
+      {
+        text: 'Child', id: 'child'
+      }
+    ]
+  }
+];
 let treeGridObj: TreeGrid = new TreeGrid({
-
   dataSource: Data,
 
   childMapping: 'subtasks',
@@ -63,10 +94,12 @@ let treeGridObj: TreeGrid = new TreeGrid({
 
   selectionSettings: { 
     type: 'Multiple', 
-    cellSelectionMode: 'Both'
+    cellSelectionMode: 'Box',
+    mode: 'Both'
   },
 
-  allowPaging: true, pageSettings: { pageSize: 15 },
+  allowPaging: true, 
+  pageSettings: { pageSize: 15 },
 
   allowResizing: true,
 
@@ -74,7 +107,20 @@ let treeGridObj: TreeGrid = new TreeGrid({
 
   allowRowDragAndDrop: true,
 
-  contextMenuItems: [ 'AddRow', 'Edit', 'Delete', 'Copy', { text: 'Cut' } ],
+  contextMenuItems: menuItems,
+  contextMenuClick: function(args){
+    if (args.item.id === 'cut'){
+      cutedRecord = copiedRecord;
+      console.log(copiedRecord);
+      
+
+    }
+     else if (args.item.id === 'above') {
+      console.log(cutedRecord);
+     }
+      
+    
+  },
 
   treeColumnIndex: 1,
   
@@ -109,7 +155,8 @@ let treeGridObj: TreeGrid = new TreeGrid({
      width: 80, 
      textAlign: 'Right'
     }
-  ]
+  ],
+  rowSelected: rowSelected
 });
 
 treeGridObj.appendTo('#TreeGrid');
@@ -135,7 +182,6 @@ let dropDownColumns: DropDownList = new DropDownList({
 
 dropDownColumns.appendTo('#editmodes');
 
-
 function rowDataBound(args: RowDataBoundEventArgs) {
   if (!(args.data as ITreeData).hasChildRecords) {
     //responsible for the rows attributes
@@ -152,5 +198,7 @@ function queryCellInfo(args: QueryCellInfoEventArgs) {
     }
   }
 }
-
+function rowSelected(args: RowSelectEventArgs): void {
+  copiedRecord = args.data;
+}
 
