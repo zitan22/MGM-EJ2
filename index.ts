@@ -1,10 +1,39 @@
-import { TreeGrid, Toolbar, Edit, Sort, Filter, Selection, Page, Resize, Reorder, RowDD, CommandColumn, ContextMenu, ITreeData } from '@syncfusion/ej2-treegrid';
-import { QueryCellInfoEventArgs, RowDataBoundEventArgs } from '@syncfusion/ej2-grids';
+import {
+  TreeGrid, 
+  Toolbar, 
+  Edit, 
+  Sort, 
+  Filter, 
+  Selection, 
+  Page, 
+  Resize, 
+  Reorder, 
+  RowDD, 
+  CommandColumn, 
+  ContextMenu, 
+  ITreeData
+} from '@syncfusion/ej2-treegrid';
+import { 
+  QueryCellInfoEventArgs, 
+  RowDataBoundEventArgs 
+} from '@syncfusion/ej2-grids';
 import { DropDownList, ChangeEventArgs } from '@syncfusion/ej2-dropdowns';
 import { Data } from './datasource.ts';
 
 
-TreeGrid.Inject( Toolbar, Edit, Sort, Filter, Selection, Page, Resize, Reorder, RowDD, CommandColumn, ContextMenu );
+TreeGrid.Inject( 
+  Toolbar, 
+  Edit, 
+  Sort, 
+  Filter, 
+  Selection, 
+  Page, 
+  Resize, 
+  Reorder, 
+  RowDD, 
+  CommandColumn, 
+  ContextMenu 
+);
 
 let treeGridObj: TreeGrid = new TreeGrid({
 
@@ -14,13 +43,28 @@ let treeGridObj: TreeGrid = new TreeGrid({
 
   toolbar: ['Add', 'Delete', 'Update', 'Cancel'],
 
-  editSettings: { allowAdding: true, allowEditing: true, allowDeleting: true, mode: 'Row', showDeleteConfirmDialog: 'true', newRowPosition: 'Above' },
+  editSettings: { 
+    allowAdding: true, 
+    allowEditing: true, 
+    allowDeleting: true, 
+    mode: 'Row', 
+    showDeleteConfirmDialog: 'true', 
+    newRowPosition: 'Above' 
+  },
 
   allowSorting: true,
 
-  allowFiltering: true, filterSettings: { type: 'FilterBar', hierarchyMode: 'Parent', mode: 'Immediate' },
+  allowFiltering: true, 
+  filterSettings: { 
+    type: 'FilterBar', 
+    hierarchyMode: 'Parent', 
+    mode: 'Immediate' 
+  },
 
-  selectionSettings: { type: 'Multiple', cellSelectionMode: 'Both' },
+  selectionSettings: { 
+    type: 'Multiple', 
+    cellSelectionMode: 'Both'
+  },
 
   allowPaging: true, pageSettings: { pageSize: 15 },
 
@@ -36,16 +80,34 @@ let treeGridObj: TreeGrid = new TreeGrid({
   
   columns: [
     {
-      field: 'taskID', headerText: 'Task ID', isPrimaryKey: true, textAlign: 'Right', validationRules: { required: true, number: true }, width: 90
+      field: 'taskID', 
+      headerText: 'Task ID', 
+      isPrimaryKey: true, 
+      textAlign: 'Right', 
+      validationRules: { required: true, number: true }, 
+      width: 90
     },
     {
-      field: 'taskName', headerText: 'Task Name', editType: 'stringedit', width: 220, validationRules: { required: true }
+      field: 'taskName', 
+      headerText: 'Task Name', 
+      editType: 'stringedit', 
+      width: 220, 
+      validationRules: { required: true }
     },
     {
-      field: 'startDate', headerText: 'Start Date', textAlign: 'Right', width: 130, editType: 'datepickeredit', format: 'yMd', validationRules: { date: true }
+      field: 'startDate', 
+      headerText: 'Start Date', 
+      textAlign: 'Right', 
+      width: 130, 
+      editType: 'datepickeredit', 
+      format: 'yMd', 
+      validationRules: { date: true }
     },
     {
-     field: 'duration', headerText: 'Duration', width: 80, textAlign: 'Right'
+     field: 'duration', 
+     headerText: 'Duration', 
+     width: 80, 
+     textAlign: 'Right'
     }
   ]
 });
